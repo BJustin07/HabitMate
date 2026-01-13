@@ -1,7 +1,9 @@
 package com.BJustin07.HabitMate.Habits.Controller;
 
+import com.BJustin07.HabitMate.Habits.Model.DTO.HabitDTO;
 import com.BJustin07.HabitMate.Habits.Model.HabitEntity;
 import com.BJustin07.HabitMate.Habits.Service.HabitService;
+import com.BJustin07.HabitMate.Users.Model.UserEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,8 +22,8 @@ public class HabitController {
     }
 
     @PostMapping("/update")
-    public String updateHabit(@RequestBody HabitEntity habitEntity){
-        return habitService.UpdateHabit(habitEntity);
+    public String updateHabit(@RequestBody HabitDTO habitDTO, @RequestParam int habitId){
+        return habitService.UpdateHabit(habitDTO, habitId);
     }
 
     @DeleteMapping("/")
@@ -30,7 +32,7 @@ public class HabitController {
     }
 
     @GetMapping("/")
-    public List<HabitEntity> getAllHabits(){
-        return habitService.getAllHabits();
+    public List<HabitDTO> getAllHabits(@RequestParam int userId){
+        return habitService.getAllHabits(userId);
     }
 }

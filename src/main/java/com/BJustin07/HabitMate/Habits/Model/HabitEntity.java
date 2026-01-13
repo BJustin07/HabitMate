@@ -1,5 +1,6 @@
 package com.BJustin07.HabitMate.Habits.Model;
 
+import com.BJustin07.HabitMate.Users.Model.UserEntity;
 import jakarta.persistence.*;
 
 import java.time.ZonedDateTime;
@@ -9,13 +10,60 @@ import java.time.ZonedDateTime;
 public class HabitEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public int id;
-    public String habitName;
-    public String habitGoal;
-    public String habitSystem;
+    private int id;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private UserEntity user;
+    private String habitName;
+    private String habitGoal;
+    private String habitSystem;
     //strng muna kunware MWF, pero dapat matutunan ko yung naka ENUM
-    public String habitSchedule;
-    public int habitCurrentStreak;
-    public int habitLongestStreak;
+    private String habitSchedule;
+    private int habitCurrentStreak;
+    private int habitLongestStreak;
 
+    public HabitEntity(){}
+
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
+    public UserEntity getUser() {
+        return user;
+    }
+    public void setUser(UserEntity user) {
+        this.user = user;
+    }
+    public String getHabitName() {
+        return habitName;
+    }
+    public void setHabitName(String habitName) {
+        this.habitName = habitName;
+    }
+
+    public String getHabitSystem() {
+        return habitSystem;
+    }
+
+    public void setHabitSystem(String habitSystem) {
+        this.habitSystem = habitSystem;
+    }
+
+    public String getHabitSchedule() {
+        return habitSchedule;
+    }
+
+    public void setHabitSchedule(String habitSchedule) {
+        this.habitSchedule = habitSchedule;
+    }
+
+    public String getHabitGoal() {
+        return habitGoal;
+    }
+
+    public void setHabitGoal(String habitGoal) {
+        this.habitGoal = habitGoal;
+    }
 }
