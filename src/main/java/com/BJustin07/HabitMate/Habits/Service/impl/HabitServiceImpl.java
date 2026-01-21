@@ -4,6 +4,7 @@ import com.BJustin07.HabitMate.Habits.Exception.HabitFailToCreate;
 import com.BJustin07.HabitMate.Habits.Exception.HabitNotFound;
 import com.BJustin07.HabitMate.Habits.Model.DTO.HabitDTO;
 import com.BJustin07.HabitMate.Habits.Model.HabitEntity;
+import com.BJustin07.HabitMate.Habits.Model.Schedule;
 import com.BJustin07.HabitMate.Habits.Repository.HabitRepository;
 import com.BJustin07.HabitMate.Habits.Service.HabitService;
 import com.BJustin07.HabitMate.Users.Exception.UserNotFound;
@@ -25,8 +26,17 @@ public class HabitServiceImpl implements HabitService {
         this.userService = userService;
     }
 
-    public String CreateHabit(HabitEntity habitEntity){
-        UserEntity user = userService.findById(habitEntity.getUser().getId());
+    public String CreateHabit(HabitDTO habitDTO, int userId){
+        UserEntity user = userService.findById(userId);
+        HabitEntity habitEntity = new HabitEntity();
+        habitEntity.setHabitName(habitDTO.getHabitName());
+        habitEntity.setHabitGoal(habitDTO.getHabitGoal());
+        habitEntity.setHabitSystem(habitDTO.getHabitSystem());
+        Schedule habitSchedule = new Schedule();
+        habitSchedule.setDays(habitDTO.getHabitSchedule().getDays());
+        habitSchedule.setStartTime(habitDTO.getHabitSchedule().getStartTime());
+        habitSchedule.setEndTime(habitDTO.getHabitSchedule().getEndTime());
+        habitEntity.setHabitSchedule(habitSchedule);
         habitEntity.setUser(user);
         try{
             habitRepository.save(habitEntity);
@@ -36,12 +46,12 @@ public class HabitServiceImpl implements HabitService {
         return  "Successfully Created Habit";
     }
 
-    public String DeleteHabit(HabitEntity habitEntity){
-        Boolean habitExists = habitRepository.existsById(habitEntity.getId());
+    public String DeleteHabit(int habitId){
+        Boolean habitExists = habitRepository.existsById(habitId);
         if(!habitExists){
             throw new HabitNotFound("Habit does not exist");
         }
-        habitRepository.deleteById(habitEntity.getId());
+        habitRepository.deleteById(habitId);
         return  "Successfully Deleted Habit";
     }
 
@@ -81,6 +91,11 @@ public class HabitServiceImpl implements HabitService {
             habitDTO.setHabitName(habitEntity.getHabitName());
             habitDTO.setHabitGoal(habitEntity.getHabitGoal());
             habitDTO.setHabitSystem(habitEntity.getHabitSystem());
+            Schedule  habitSchedule = new Schedule();
+            habitSchedule.setDays(habitEntity.getHabitSchedule().getDays());
+            habitSchedule.setStartTime(habitEntity.getHabitSchedule().getStartTime());
+            habitSchedule.setEndTime(habitEntity.getHabitSchedule().getEndTime());
+            habitDTO.setHabitSchedule(habitSchedule);
             habitDTOs.add(habitDTO);
         }
 

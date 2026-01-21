@@ -1,18 +1,20 @@
 package com.BJustin07.HabitMate.Habits.Model.DTO;
 
 
+import com.BJustin07.HabitMate.Habits.Model.Schedule;
+
 public class HabitDTO {
     private int id;
     private String habitName;
     private String habitGoal;
     private String habitSystem;
-    private String habitSchedule;
+    private Schedule habitSchedule;
 
-    public String getHabitSchedule() {
+    public Schedule getHabitSchedule() {
         return habitSchedule;
     }
 
-    public void setHabitSchedule(String habitSchedule) {
+    public void setHabitSchedule(Schedule habitSchedule) {
         this.habitSchedule = habitSchedule;
     }
 

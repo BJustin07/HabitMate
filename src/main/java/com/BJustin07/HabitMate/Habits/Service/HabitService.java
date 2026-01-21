@@ -7,8 +7,8 @@ import com.BJustin07.HabitMate.Users.Model.UserEntity;
 import java.util.List;
 
 public interface HabitService {
-    public String CreateHabit(HabitEntity habitEntity);
-    public String DeleteHabit(HabitEntity habitEntity);
+    public String CreateHabit(HabitDTO habitDTO, int userId);
+    public String DeleteHabit(int habitId);
     public String UpdateHabit(HabitDTO habitDTO, int habitId);
     public List<HabitDTO> getAllHabits(int userId);
 }

@@ -17,8 +17,8 @@ public class HabitEntity {
     private String habitName;
     private String habitGoal;
     private String habitSystem;
-    //strng muna kunware MWF, pero dapat matutunan ko yung naka ENUM
-    private String habitSchedule;
+    @Embedded
+    private Schedule habitSchedule;
     private int habitCurrentStreak;
     private int habitLongestStreak;
 
@@ -51,11 +51,11 @@ public class HabitEntity {
         this.habitSystem = habitSystem;
     }
 
-    public String getHabitSchedule() {
+    public Schedule getHabitSchedule() {
         return habitSchedule;
     }
 
-    public void setHabitSchedule(String habitSchedule) {
+    public void setHabitSchedule(Schedule habitSchedule) {
         this.habitSchedule = habitSchedule;
     }
 

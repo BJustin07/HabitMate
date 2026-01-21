@@ -32,4 +32,17 @@ public class UserServiceImpl implements UserService {
         return userRepository.findById(id).
                 orElseThrow(()->new UserNotFound("User not found"));
     }
+
+    public UserEntity findByUsername(String username){
+        UserEntity user =  userRepository.findByUsername(username);
+        if(user == null){
+            throw new UserNotFound("User not found");
+        }
+        return user;
+    }
+
+    public boolean userExistsByUsername(String username){
+        UserEntity user =  userRepository.findByUsername(username);
+        return user != null;
+    }
 }

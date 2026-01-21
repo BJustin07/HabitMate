@@ -17,8 +17,8 @@ public class HabitController {
     }
 
     @PostMapping("/")
-    public String createHabit(@RequestBody HabitEntity habitEntity){
-        return habitService.CreateHabit(habitEntity);
+    public String createHabit(@RequestBody HabitDTO habitDTO, @RequestParam int userId){
+        return habitService.CreateHabit(habitDTO, userId);
     }
 
     @PostMapping("/update")
@@ -27,8 +27,8 @@ public class HabitController {
     }
 
     @DeleteMapping("/")
-    public String deleteHabit(@RequestBody HabitEntity habitEntity){
-        return habitService.DeleteHabit(habitEntity);
+    public String deleteHabit(@RequestParam int habitId){
+        return habitService.DeleteHabit(habitId);
     }
 
     @GetMapping("/")
